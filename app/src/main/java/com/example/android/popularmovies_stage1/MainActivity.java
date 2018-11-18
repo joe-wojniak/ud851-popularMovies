@@ -11,29 +11,85 @@ https://review.udacity.com/#!/rubrics/66/view
 
 Implementation Guide:
 https://docs.google.com/document/d/1ZlN1fUsCSKuInLECcJkslIqvpKlP7jWL2TP9m6UiA6I/pub?embedded=true#h.cntdg23jy69n
- */
 
+Example code adapted from these sources:
+ud851-Exercises\Lesson03-Green-Recycler-View\T03.04-Exercise-WiringUpRecyclerView
+StackOverflow: https://stackoverflow.com/questions/40587168/simple-android-grid-example-using-
+recyclerview-with-gridlayoutmanager-like-the
+and 101 apps.co.za: https://www.101apps.co.za/index.php/articles/gridview-tutorial-using-the-
+picasso-library.html
+https://www.101apps.co.za/index.php/articles/android-recyclerview-and-picasso-tutorial.html
+https://www.101apps.co.za/index.php/ebooks/let-your-apps-take-a-giant-leap-a-tutorial.html*/
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class MainActivity extends AppCompatActivity {
+
+    private MovieRecyclerViewAdapter mAdapter;
+    private RecyclerView mMoviePostersRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView imageView = findViewById(R.id.image);
-        Picasso.with(this).load("http://i.imgur.com/DvpvklR.png").into(imageView);
+        movieOnClickListener = new MovieOnClickListener();
+        
+        mMoviePostersRecyclerView = findViewById(R.id.rvPosters);
+        mMoviePostersRecyclerView.setHasFixedSize(true);
+        GridLayoutManager mLayoutManager = new GridLayoutManager(this,3);
+        mMoviePostersRecyclerView.setLayoutManager(mLayoutManager);
 
-        TextView textView = findViewById(R.id.text);
-        textView.setText("Eureka!");
+        articleList = getArticleData();
+
+        mAdapter = new MovieRecyclerViewAdapter(this,articleList);
+        mMoviePostersRecyclerView.setAdapter(mAdapter);
+
+        webview = new WebView(this);
+
+        setContentView(R.layout.progressbar);
+
+        String url = getIntent().getStringExtra("articleUrl");
+        if(url == null) {
+            url = "http://www.101apps.co.za/";
+        }
+        webview.loadUrl(url);
+        webview.setWebViewClient(new WebViewClient() {
+            public void onPageFinished(WebView view, String url){
+                setContentView(webview);
+            }
+        }
     }
-    /*TODO: implement http request from TMDB
+
+    @Override
+    public void onClick (View v) {
+        String selectedArticleUrl = getSelectedArticleUrl(v);
+        showSelectedArticle(selectedArticleUrl);
+    }
+
+    private String getSelectedArticleUrl (View view) {
+        int selectedItemPostion = mMoviePostersRecyclerView.getChildAdapterPosition(view);
+        String url = MyArticleData.articles[selectedItemPosition][1];
+        return url;
+    }
+
+    private void showSelectedArticle(String articleUrl){
+        Intent intent = new Intent(this, WebActivity.class);
+        intent.putExtra("articleUrl", articleUrl);
+        startActivity(intent);
+    }
+
+
+    /*TODO: setup Gridlayout in MainActivity
+
+    /*TODO: implement http request from TMDb
     In order to request popular movies you will want to request data from the /movie/popular and /movie/top_rated endpoints
     https://www.google.com/url?q=https://developers.themoviedb.org/3/discover/movie-discover&sa=D&ust=1541914498758000
 
