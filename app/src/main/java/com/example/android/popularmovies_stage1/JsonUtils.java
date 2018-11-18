@@ -43,7 +43,7 @@ public class JsonUtils {
                 // Extract out the title, poster_path, and overview
                 String title = firstResult.optString(KEY_TITLE);
                 String poster_path = firstResult.optString(KEY_POSTER);
-                String overview = firstResult.opt(KEY_OVERVIEW)
+                String overview = firstResult.optString(KEY_OVERVIEW);
                 // TODO Add the remaining movie data attributes
 
                 // Make new movie object using data attributes from json
