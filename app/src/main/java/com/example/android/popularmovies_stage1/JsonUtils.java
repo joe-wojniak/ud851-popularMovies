@@ -13,7 +13,6 @@ public class JsonUtils {
 
     private static final String LOG_TAG = JsonUtils.class.getSimpleName();
 
-    private static String KEY_PAGE = "page";
     private static String KEY_RESULTS = "results";
     private static String KEY_ID = "id";
     private static String KEY_VOTE="vote_average";
@@ -33,7 +32,6 @@ public class JsonUtils {
 
         try {
             JSONObject baseJsonResponse = new JSONObject(json);
-            //JSONObject page = baseJsonResponse.optJSONObject(KEY_PAGE);
             JSONArray resultsArray = baseJsonResponse.optJSONArray(KEY_RESULTS);
 
             // looping through the page results

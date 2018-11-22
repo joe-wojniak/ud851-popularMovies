@@ -21,15 +21,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static View.OnClickListener movieOnClickListener;
-    private RecyclerView mMoviePostersRecyclerView;
-    private static MovieRecyclerViewAdapter mAdapter;
+    View.OnClickListener movieOnClickListener;
+    RecyclerView mMoviePostersRecyclerView;
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -41,20 +39,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        movieOnClickListener = new MovieOnClickListener();
+        // movieOnClickListener = new MovieOnClickListener();
 
         mMoviePostersRecyclerView = findViewById(R.id.rvPosters);
         mMoviePostersRecyclerView.setHasFixedSize(true);
-        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 3);
-        mMoviePostersRecyclerView.setLayoutManager(mLayoutManager);
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(this, 2);
+        mMoviePostersRecyclerView.setLayoutManager(mGridLayoutManager);
 
         String json = getResources().getString(R.string.json);
-        List<Movie> movieList = JsonUtils.extractFeatureFromJson(json);
+        List<Movie> jsonMovieList = JsonUtils.extractFeatureFromJson(json);
 
-        mAdapter = new MovieRecyclerViewAdapter(this, movieList);
+        int[] movieList = new int[]{R.drawable.dvpvkir, R.drawable.dvpvkir, R.drawable.dvpvkir,
+                R.drawable.dvpvkir, R.drawable.dvpvkir, R.drawable.dvpvkir};
+
+        MovieRecyclerViewAdapter mAdapter = new MovieRecyclerViewAdapter(this, movieList);
         mMoviePostersRecyclerView.setAdapter(mAdapter);
 
-        // setContentView(R.layout.progressbar);
+        /* setContentView(R.layout.progressbar);
 
         String url = getIntent().getStringExtra("articleUrl");
         if (url == null) {
@@ -106,4 +107,5 @@ public class MainActivity extends AppCompatActivity {
 
     Combining these three parts gives us a final url of http://image.tmdb.org/t/p/w185//nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
      */
+    }
 }

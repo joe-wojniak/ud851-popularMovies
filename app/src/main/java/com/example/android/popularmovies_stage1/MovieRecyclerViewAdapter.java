@@ -14,8 +14,8 @@ import android.widget.ImageView;
 
 public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.MovieViewHolder> {
 
-    private Context mContext;
-    private int[] mMovieList;
+    Context mContext;
+    int[] mMovieList;
 
     private static final String TAG = MovieRecyclerViewAdapter.class.getSimpleName();
 
