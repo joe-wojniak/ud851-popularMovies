@@ -27,14 +27,14 @@ public class JsonUtils {
 
     private JsonUtils(){}
 
-    private static List<Movie> extractFeatureFromJson (String json) {
+    public static List<Movie> extractFeatureFromJson (String json) {
 
         List<Movie> movieList = new ArrayList<>();
 
         try {
             JSONObject baseJsonResponse = new JSONObject(json);
-            JSONObject page = baseJsonResponse.optJSONObject(KEY_PAGE);
-            JSONArray resultsArray = page.optJSONArray(KEY_RESULTS);
+            //JSONObject page = baseJsonResponse.optJSONObject(KEY_PAGE);
+            JSONArray resultsArray = baseJsonResponse.optJSONArray(KEY_RESULTS);
 
             // looping through the page results
             for (int i = 0; i < resultsArray.length(); i++) {

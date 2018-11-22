@@ -21,19 +21,25 @@ picasso-library.html
 https://www.101apps.co.za/index.php/articles/android-recyclerview-and-picasso-tutorial.html
 https://www.101apps.co.za/index.php/ebooks/let-your-apps-take-a-giant-leap-a-tutorial.html*/
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MovieRecyclerViewAdapter mAdapter;
+    public static View.OnClickListener movieOnClickListener;
     private RecyclerView mMoviePostersRecyclerView;
+    private static MovieRecyclerViewAdapter mAdapter;
+
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+
+    public MainActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,51 +47,42 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         movieOnClickListener = new MovieOnClickListener();
-        
+
         mMoviePostersRecyclerView = findViewById(R.id.rvPosters);
         mMoviePostersRecyclerView.setHasFixedSize(true);
-        GridLayoutManager mLayoutManager = new GridLayoutManager(this,3);
+        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 3);
         mMoviePostersRecyclerView.setLayoutManager(mLayoutManager);
 
-        articleList = getArticleData();
+        String json = getResources().getString(R.string.json);
+        List<Movie> movieList = JsonUtils.extractFeatureFromJson(json);
 
-        mAdapter = new MovieRecyclerViewAdapter(this,articleList);
+        mAdapter = new MovieRecyclerViewAdapter(this, movieList);
         mMoviePostersRecyclerView.setAdapter(mAdapter);
 
-        webview = new WebView(this);
-
-        setContentView(R.layout.progressbar);
+        // setContentView(R.layout.progressbar);
 
         String url = getIntent().getStringExtra("articleUrl");
-        if(url == null) {
-            url = "http://www.101apps.co.za/";
-        }
-        webview.loadUrl(url);
-        webview.setWebViewClient(new WebViewClient() {
-            public void onPageFinished(WebView view, String url){
-                setContentView(webview);
-            }
+        if (url == null) {
+            //TODO Replace with poster image
+            url = "http://i.imgur.com/DvpvklR.png";
         }
     }
 
-    @Override
-    public void onClick (View v) {
-        String selectedArticleUrl = getSelectedArticleUrl(v);
-        showSelectedArticle(selectedArticleUrl);
+    private class MovieOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            //TODO replace toast message with movie detail activity
+            Toast toast = Toast.makeText(getApplicationContext(),"You clicked something!",
+                    Toast.LENGTH_LONG);toast.show();
+        }
     }
 
-    private String getSelectedArticleUrl (View view) {
-        int selectedItemPostion = mMoviePostersRecyclerView.getChildAdapterPosition(view);
-        String url = MyArticleData.articles[selectedItemPosition][1];
+    private String getselectedMovieUrl(View view) {
+        int selectedItemPosition = mMoviePostersRecyclerView.getChildAdapterPosition(view);
+        //TODO Replace with poster image
+        String url = "http://i.imgur.com/DvpvklR.png";
         return url;
     }
-
-    private void showSelectedArticle(String articleUrl){
-        Intent intent = new Intent(this, WebActivity.class);
-        intent.putExtra("articleUrl", articleUrl);
-        startActivity(intent);
-    }
-
 
     /*TODO: setup Gridlayout in MainActivity
 

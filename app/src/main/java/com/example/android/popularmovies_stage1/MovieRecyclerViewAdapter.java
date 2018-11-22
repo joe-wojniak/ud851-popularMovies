@@ -20,51 +20,49 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.MovieViewHolder> {
+
+    List<Movie> data;
+    private LayoutInflater inflater;
 
     private static final String TAG = MovieRecyclerViewAdapter.class.getSimpleName();
 
-    private int mNumberItems;
-
-    //TODO: movie poster image from TMDb replaces this placeholder image
-    public Uri uri = Uri.parse("http://i.imgur.com/DvpvklR.png");
-
     // private AdapterView.OnItemClickListener mClickListener;
 
-    public MovieRecyclerViewAdapter(int numberOfItems){
-        mNumberItems = numberOfItems;
+    public MovieRecyclerViewAdapter(Context context, List<Movie> data){
+        inflater = LayoutInflater.from(context);
+        this.data = data;
     }
 
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        Context context = viewGroup.getContext();
         int layoutIdForGridItem = R.layout.recyclerview_item;
-        LayoutInflater inflater = LayoutInflater.from(context);
-        boolean shouldAttachToParentImmediately = false;
 
-        View view = inflater.inflate(layoutIdForGridItem, viewGroup, shouldAttachToParentImmediately);
-        MovieViewHolder viewHolder = new MovieViewHolder(view);
-
-        return viewHolder;
+        View view = inflater.inflate(layoutIdForGridItem, viewGroup, false);
+        MovieViewHolder movieHolder = new MovieViewHolder(view);
+        return movieHolder;
     }
 
     @Override
     public void onBindViewHolder (MovieViewHolder holder, int i) {
-        AnArticle current = data.get(i);
-        Uri uri = Uri.parse(current.imageUrl);
-        Context context = holder.articleImage.getContext();
-        Picasso.with(context).load(uri).into(holder);
+        // Movie current = data.get(i);
+        //TODO: movie poster image from TMDb replaces this placeholder image
+        Uri uri = Uri.parse("http://i.imgur.com/DvpvklR.png");
+        Context context = holder.posterImage.getContext();
+        Picasso.with(context).load(uri).into(holder.posterImage);
     }
 
     public int getItemCount() {
-        return mNumberItems;
+        return data.size();
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
-        ImageView gridItemImageView;
+        ImageView posterImage;
         public MovieViewHolder (View itemView){
             super(itemView);
-            gridItemImageView = itemView.findViewById(R.id.rvPosters);
+            posterImage = itemView.findViewById(R.id.rvPosters);
             itemView.setOnClickListener(MainActivity.movieOnClickListener);
         }
     }
