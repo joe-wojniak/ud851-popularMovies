@@ -12,14 +12,9 @@ https://review.udacity.com/#!/rubrics/66/view
 Implementation Guide:
 https://docs.google.com/document/d/1ZlN1fUsCSKuInLECcJkslIqvpKlP7jWL2TP9m6UiA6I/pub?embedded=true#h.cntdg23jy69n
 
-Example code adapted from these sources:
+Example code adapted from:
 ud851-Exercises\Lesson03-Green-Recycler-View\T03.04-Exercise-WiringUpRecyclerView
-StackOverflow: https://stackoverflow.com/questions/40587168/simple-android-grid-example-using-
-recyclerview-with-gridlayoutmanager-like-the
-and 101 apps.co.za: https://www.101apps.co.za/index.php/articles/gridview-tutorial-using-the-
-picasso-library.html
-https://www.101apps.co.za/index.php/articles/android-recyclerview-and-picasso-tutorial.html
-https://www.101apps.co.za/index.php/ebooks/let-your-apps-take-a-giant-leap-a-tutorial.html*/
+https://www.codingdemos.com/android-gridlayout-example-recyclerview/*/
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -64,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         String url = getIntent().getStringExtra("articleUrl");
         if (url == null) {
             //TODO Replace with poster image
-            url = "http://i.imgur.com/DvpvklR.png";
+            url = "http://i.imgur.com/dvpvkir.png";
         }
     }
 
@@ -80,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     private String getselectedMovieUrl(View view) {
         int selectedItemPosition = mMoviePostersRecyclerView.getChildAdapterPosition(view);
         //TODO Replace with poster image
-        String url = "http://i.imgur.com/DvpvklR.png";
+        String url = "http://i.imgur.com/dvpvkir.png";
         return url;
     }
 
