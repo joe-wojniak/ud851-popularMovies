@@ -2,23 +2,17 @@ package com.example.android.popularmovies_stage1;
 
 /* Example code modified from these sources:
 ud851-Exercises\Lesson03-Green-Recycler-View\T03.04-Exercise-WiringUpRecyclerView
-StackOverflow: https://stackoverflow.com/questions/40587168/simple-android-grid-example-using-
-recyclerview-with-gridlayoutmanager-like-the
-and 101 apps.co.za:
-https://www.101apps.co.za/index.php/articles/android-recyclerview-and-picasso-tutorial.html
-https://www.101apps.co.za/index.php/articles/gridview-tutorial-using-the-
-picasso-library.html
-https://www.101apps.co.za/index.php/ebooks/let-your-apps-take-a-giant-leap-a-tutorial.html*/
+https://www.codingdemos.com/android-gridlayout-example-recyclerview/
+*/
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-public class MovieRecyclerViewAdapter extends RecyclerView.Adapter {
+public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.MovieViewHolder> {
 
     private Context mContext;
     private int[] mMovieList;
@@ -46,13 +40,13 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return mMovieList.length;
     }
-}
 
-class MovieViewHolder extends RecyclerView.ViewHolder {
-    ImageView posterImage;
+    class MovieViewHolder extends RecyclerView.ViewHolder {
+        ImageView posterImage;
 
-    public MovieViewHolder(View itemView) {
-        super(itemView);
-        posterImage = itemView.findViewById(R.id.rvPosters);
+        public MovieViewHolder(View itemView) {
+            super(itemView);
+            posterImage = itemView.findViewById(R.id.rvPosters);
+        }
     }
 }
