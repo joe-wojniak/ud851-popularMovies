@@ -1,4 +1,4 @@
-package com.example.android.popularmovies_stage1;
+package com.example.android.popularmovies_stage1.model;
 
 public class Movie {
 

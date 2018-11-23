@@ -6,6 +6,7 @@ https://www.codingdemos.com/android-gridlayout-example-recyclerview/
 */
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,14 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     @Override
     public void onBindViewHolder(final MovieViewHolder holder, int position) {
         holder.posterImage.setImageResource(mMovieList[position]);
+        holder.posterImage.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent mIntent = new Intent(mContext, DetailActivity.class);
+                mIntent.putExtra("image", mMovieList[holder.getAdapterPosition()]);
+                mContext.startActivity(mIntent);
+            }
+        });
     }
 
     @Override

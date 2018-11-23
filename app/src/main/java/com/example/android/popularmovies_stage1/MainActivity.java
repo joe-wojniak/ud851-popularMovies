@@ -20,13 +20,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
+
+import com.example.android.popularmovies_stage1.model.Movie;
+import com.example.android.popularmovies_stage1.utils.JsonUtils;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    View.OnClickListener movieOnClickListener;
     RecyclerView mMoviePostersRecyclerView;
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -39,11 +40,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // movieOnClickListener = new MovieOnClickListener();
-
         mMoviePostersRecyclerView = findViewById(R.id.rvPosters);
-        mMoviePostersRecyclerView.setHasFixedSize(true);
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(this, 2);
+        mMoviePostersRecyclerView.setHasFixedSize(false);
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(this, 3);
         mMoviePostersRecyclerView.setLayoutManager(mGridLayoutManager);
 
         String json = getResources().getString(R.string.json);
