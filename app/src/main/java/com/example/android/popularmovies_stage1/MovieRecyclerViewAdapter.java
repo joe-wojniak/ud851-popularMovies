@@ -3,7 +3,6 @@ package com.example.android.popularmovies_stage1;
 /* Example code modified from these sources:
 ud851-Exercises\Lesson03-Green-Recycler-View\T03.04-Exercise-WiringUpRecyclerView
 https://www.codingdemos.com/android-gridlayout-example-recyclerview/
-Thinking in Java, 4th Ed., by Bruce Eckel - Iterator page 406
 */
 
 import android.content.Context;
@@ -16,7 +15,6 @@ import android.widget.ImageView;
 import com.example.android.popularmovies_stage1.model.Movie;
 import com.squareup.picasso.Picasso;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.MovieViewHolder> {
@@ -40,16 +38,11 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
     @Override
     public void onBindViewHolder(final MovieViewHolder holder, int position) {
-
-        Iterator<Movie> it = mMovieList.iterator();
-        while (it.hasNext()) {
-            Movie m = it.next();
+        Movie m = mMovieList.get(position);
 
             Picasso.with(mContext)
                     .load(m.getPosterPath())
                     .into(holder.posterImage);
-        }
-
     }
 
     @Override
