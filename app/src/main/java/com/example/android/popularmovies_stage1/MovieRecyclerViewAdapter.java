@@ -2,7 +2,9 @@ package com.example.android.popularmovies_stage1;
 
 /* Example code modified from these sources:
 ud851-Exercises\Lesson03-Green-Recycler-View\T03.04-Exercise-WiringUpRecyclerView
+https://github.com/joe-wojniak/sandwich-club-starter-code.git
 https://www.codingdemos.com/android-gridlayout-example-recyclerview/
+https://github.com/prime417/RecyclerViewClickListener/blob/master/app/src/main/java/primer/com/recyclerviewmaster/CustomAdapter.java
 */
 
 import android.content.Context;
@@ -19,6 +21,8 @@ import java.util.List;
 
 public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.MovieViewHolder> {
 
+    private OnCardClickListener onCardClickListener;
+    //TODO define variable scope: private?
     Context mContext;
     List<Movie> mMovieList;
 
@@ -33,16 +37,32 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item,
                 parent, false);
+
         return new MovieViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final MovieViewHolder holder, int position) {
-        Movie m = mMovieList.get(position);
+    public void onBindViewHolder(final MovieViewHolder holder, final int position) {
+        final Movie m = mMovieList.get(position);
 
             Picasso.with(mContext)
                     .load(m.getPosterPath())
                     .into(holder.posterImage);
+
+            holder.posterImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onCardClickListener.OnCardClicked(view, holder.getAdapterPosition());
+                }
+            });
+    }
+
+    public void setOnCardClickListener(OnCardClickListener onCardClickListener) {
+        this.onCardClickListener = onCardClickListener;
+    }
+
+    public interface OnCardClickListener {
+        void OnCardClicked(View view, int position);
     }
 
     @Override
