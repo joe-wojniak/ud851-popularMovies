@@ -14,7 +14,8 @@ https://docs.google.com/document/d/1ZlN1fUsCSKuInLECcJkslIqvpKlP7jWL2TP9m6UiA6I/
 
 Example code adapted from:
 ud851-Exercises\Lesson03-Green-Recycler-View\T03.04-Exercise-WiringUpRecyclerView
-https://www.codingdemos.com/android-gridlayout-example-recyclerview/*/
+https://www.codingdemos.com/android-gridlayout-example-recyclerview/
+*/
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -46,22 +47,12 @@ public class MainActivity extends AppCompatActivity {
         mMoviePostersRecyclerView.setLayoutManager(mGridLayoutManager);
 
         String json = getResources().getString(R.string.json);
-        List<Movie> jsonMovieList = JsonUtils.extractFeatureFromJson(json);
-
-        int[] movieList = new int[]{R.drawable.dvpvkir, R.drawable.dvpvkir, R.drawable.dvpvkir,
-                R.drawable.dvpvkir, R.drawable.dvpvkir, R.drawable.dvpvkir};
+        List<Movie> movieList = JsonUtils.extractFeatureFromJson(json);
 
         MovieRecyclerViewAdapter mAdapter = new MovieRecyclerViewAdapter(this, movieList);
         mMoviePostersRecyclerView.setAdapter(mAdapter);
 
         /* setContentView(R.layout.progressbar);
-
-        String url = getIntent().getStringExtra("articleUrl");
-        if (url == null) {
-            //TODO Replace with poster image
-            url = "http://i.imgur.com/dvpvkir.png";
-        }
-    }
 
     private class MovieOnClickListener implements View.OnClickListener {
         @Override
@@ -72,15 +63,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private String getselectedMovieUrl(View view) {
-        int selectedItemPosition = mMoviePostersRecyclerView.getChildAdapterPosition(view);
-        //TODO Replace with poster image
-        String url = "http://i.imgur.com/dvpvkir.png";
-        return url;
-    }
-
-    /*TODO: setup Gridlayout in MainActivity
-
     /*TODO: implement http request from TMDb
     In order to request popular movies you will want to request data from the /movie/popular and /movie/top_rated endpoints
     https://www.google.com/url?q=https://developers.themoviedb.org/3/discover/movie-discover&sa=D&ust=1541914498758000
@@ -90,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     Example request: http://api.themoviedb.org/3/movie/popular?api_key=[YOUR_API_KEY]
      */
 
-    /*TODO: resolve movie poster path
+    /*COMPLETE: resolve movie poster path
     A note on resolving poster paths with themoviedb.org API
     You will notice that the API response provides a relative path to a movie poster image when you request the metadata for a specific movie.
 

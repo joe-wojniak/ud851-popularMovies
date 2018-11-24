@@ -1,5 +1,9 @@
 package com.example.android.popularmovies_stage1;
 
+/*Example code adapted from:
+        ud851-Exercises\Lesson03-Green-Recycler-View\T03.04-Exercise-WiringUpRecyclerView
+        https://www.codingdemos.com/android-gridlayout-example-recyclerview/*/
+
 import android.os.Bundle;
 import android.widget.ImageView;
 

@@ -17,18 +17,19 @@ public class JsonUtils {
 
     private static String KEY_RESULTS = "results";
     private static String KEY_ID = "id";
-    private static String KEY_VOTE="vote_average";
-    private static String KEY_TITLE="title";
-    private static String KEY_POP="popularity";
-    private static String KEY_POSTER="poster_path";
-    private static String KEY_LANG="original_language";
-    private static String KEY_ORIG_TITLE="original_title";
-    private static String KEY_OVERVIEW="overview";
-    private static String KEY_RELEASE="release_date";
+    private static String KEY_VOTE = "vote_average";
+    private static String KEY_TITLE = "title";
+    private static String KEY_POP = "popularity";
+    private static String KEY_POSTER = "poster_path";
+    private static String KEY_LANG = "original_language";
+    private static String KEY_ORIG_TITLE = "original_title";
+    private static String KEY_OVERVIEW = "overview";
+    private static String KEY_RELEASE = "release_date";
 
-    private JsonUtils(){}
+    private JsonUtils() {
+    }
 
-    public static List<Movie> extractFeatureFromJson (String json) {
+    public static List<Movie> extractFeatureFromJson(String json) {
 
         List<Movie> movieList = new ArrayList<>();
 
@@ -45,11 +46,14 @@ public class JsonUtils {
                 String poster_path = firstResult.optString(KEY_POSTER);
                 String overview = firstResult.optString(KEY_OVERVIEW);
                 // TODO Add the remaining movie data attributes
-
+                // Build poster uri:
+                String baseUri = "http://image.tmdb.org/t/p/";
+                String posterSize = "w185";
+                poster_path = baseUri + posterSize + poster_path;
                 // Make new movie object using data attributes from json
                 // Add movie object to list of movies
-                Movie movie = new Movie(null,null,title,null,poster_path,
-                        null,null,overview,null);
+                Movie movie = new Movie(null, null, title, null, poster_path,
+                        null, null, overview, null);
                 movieList.add(movie);
             }
 
