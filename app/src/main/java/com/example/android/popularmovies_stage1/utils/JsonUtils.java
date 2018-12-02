@@ -47,10 +47,7 @@ public class JsonUtils {
                 String voteAverage = firstResult.optString(KEY_VOTE);
                 String overview = firstResult.optString(KEY_OVERVIEW);
                 String popularity = firstResult.optString(KEY_POP);
-                // Build poster uri:
-                String baseUri = "http://image.tmdb.org/t/p/";
-                String posterSize = "w185";
-                poster_path = baseUri + posterSize + poster_path;
+
                 // Make new movie object using data attributes from json
                 // Add movie object to list of movies
                 Movie movie = new Movie(title, releaseDate, poster_path, voteAverage, overview, popularity);

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.android.popularmovies_stage1.model.Movie;
+import com.example.android.popularmovies_stage1.utils.MovieListService;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -41,8 +42,10 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     public void onBindViewHolder(final MovieViewHolder holder, int position) {
         final Movie m = mMovieList.get(position);
 
+        String posterPath = MovieListService.buildPosterURL(m.getPosterPath(), "w342");
+
         Picasso.with(mContext)
-                .load(m.getPosterPath())
+                .load(posterPath)
                 .into(holder.posterImage);
 
         holder.posterImage.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +54,9 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
                 Intent mIntent = new Intent(mContext, DetailActivity.class);
                 mIntent.putExtra("movieTitle", m.getTitle());
                 mIntent.putExtra("movieReleaseDate", m.getRelease_date());
+                mIntent.putExtra("movieVoteAverage", m.getVoteAverage());
+                mIntent.putExtra("movieOverview", m.getOverview());
+                mIntent.putExtra("moviePosterPath",m.getPosterPath());
                 mContext.startActivity(mIntent);
             }
         });
