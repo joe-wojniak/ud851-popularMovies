@@ -39,11 +39,12 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
     @Override
     public void onBindViewHolder(final MovieViewHolder holder, int position) {
-        Movie m = mMovieList.get(position);
+        final Movie m = mMovieList.get(position);
 
-            Picasso.with(mContext)
-                    .load(m.getPosterPath())
-                    .into(holder.posterImage);
+        Picasso.with(mContext)
+                .load(m.getPosterPath())
+                .into(holder.posterImage);
+
         holder.posterImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
