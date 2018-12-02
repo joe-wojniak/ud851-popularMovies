@@ -16,15 +16,12 @@ public class JsonUtils {
     private static final String LOG_TAG = JsonUtils.class.getSimpleName();
 
     private static String KEY_RESULTS = "results";
-    private static String KEY_ID = "id";
-    private static String KEY_VOTE = "vote_average";
     private static String KEY_TITLE = "title";
-    private static String KEY_POP = "popularity";
-    private static String KEY_POSTER = "poster_path";
-    private static String KEY_LANG = "original_language";
-    private static String KEY_ORIG_TITLE = "original_title";
-    private static String KEY_OVERVIEW = "overview";
     private static String KEY_RELEASE = "release_date";
+    private static String KEY_POSTER = "poster_path";
+    private static String KEY_VOTE = "vote_average";
+    private static String KEY_OVERVIEW = "overview";
+    private static String KEY_POP = "popularity";
 
     private JsonUtils() {
     }
@@ -41,19 +38,22 @@ public class JsonUtils {
             for (int i = 0; i < resultsArray.length(); i++) {
                 // Extract out the first result (which is a movie)
                 JSONObject firstResult = resultsArray.getJSONObject(i);
-                // Extract out the title, poster_path, and overview
+                // Extract out the title, release date, poster_path, vote average,
+                // and plot synopsis (overview)
+
                 String title = firstResult.optString(KEY_TITLE);
+                String releaseDate = firstResult.optString(KEY_RELEASE);
                 String poster_path = firstResult.optString(KEY_POSTER);
+                String voteAverage = firstResult.optString(KEY_VOTE);
                 String overview = firstResult.optString(KEY_OVERVIEW);
-                // TODO Add the remaining movie data attributes
+                String popularity = firstResult.optString(KEY_POP);
                 // Build poster uri:
                 String baseUri = "http://image.tmdb.org/t/p/";
                 String posterSize = "w185";
                 poster_path = baseUri + posterSize + poster_path;
                 // Make new movie object using data attributes from json
                 // Add movie object to list of movies
-                Movie movie = new Movie(null, null, title, null, poster_path,
-                        null, null, overview, null);
+                Movie movie = new Movie(title, releaseDate, poster_path, voteAverage, overview, popularity);
                 movieList.add(movie);
             }
 

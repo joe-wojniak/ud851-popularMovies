@@ -4,48 +4,26 @@ import java.io.Serializable;
 
 public class Movie implements Serializable {
 
-    private String id;
-    private String vote_average;
     private String title;
-    private String popularity;
-    private String posterPath;
-    private String original_language;
-    private String original_title;
-    private String overview;
     private String release_date;
+    private String posterPath;
+    private String vote_average;
+    private String overview;
+    private String popularity;
 
-    public Movie(String id, String vote_average, String title, String popularity, String posterPath,
-                 String original_language, String original_title, String overview, String release_date) {
-        this.id = id;
-        this.vote_average = vote_average;
+    public Movie(String title, String release_date, String posterPath, String vote_average,
+                 String overview, String popularity) {
+
         this.title = title;
-
-        this.popularity = popularity;
-        this.posterPath = posterPath;
-        this.original_language = original_language;
-
-        this.original_title = original_title;
-        this.overview = overview;
         this.release_date = release_date;
+        this.posterPath = posterPath;
+        this.vote_average = vote_average;
+        this.overview = overview;
+        this.popularity = popularity;
+
     }
 
     // Getter and Setter methods
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getVoteAverage() {
-        return vote_average;
-    }
-
-    public void setVoteAverage(String vote_average) {
-        this.vote_average = vote_average;
-    }
 
     public String getTitle() {
         return title;
@@ -55,12 +33,12 @@ public class Movie implements Serializable {
         this.title = title;
     }
 
-    public String getPopularity() {
-        return popularity;
+    public String getRelease_date() {
+        return release_date;
     }
 
-    public void setPopularity(String popularity) {
-        this.popularity = popularity;
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
     }
 
     public String getPosterPath() {
@@ -71,19 +49,12 @@ public class Movie implements Serializable {
         this.posterPath = posterPath;
     }
 
-    public String getOriginal_language() {
-        return original_language;
+    public String getVoteAverage() {
+        return vote_average;
     }
 
-    public void setOriginal_language(String original_language) {
-        this.original_language = original_language; }
-
-    public String getOriginalTitle() {
-        return original_title;
-    }
-
-    public void setOriginalTitle(String original_title) {
-        this.original_title = original_title;
+    public void setVoteAverage(String vote_average) {
+        this.vote_average = vote_average;
     }
 
     public String getOverview() {
@@ -94,12 +65,12 @@ public class Movie implements Serializable {
         this.overview = overview;
     }
 
-    public String getRelease_date() {
-        return release_date;
+    public String getPopularity() {
+        return popularity;
     }
 
-    public void setRelease_date(String release_date) {
-        this.release_date = release_date;
+    public void setPopularity(String popularity) {
+        this.popularity = popularity;
     }
 
 }

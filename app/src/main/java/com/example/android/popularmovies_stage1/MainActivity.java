@@ -52,17 +52,6 @@ public class MainActivity extends AppCompatActivity {
         MovieRecyclerViewAdapter mAdapter = new MovieRecyclerViewAdapter(this, movieList);
         mMoviePostersRecyclerView.setAdapter(mAdapter);
 
-        /* setContentView(R.layout.progressbar);
-
-    private class MovieOnClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            //TODO replace toast message with movie detail activity
-            Toast toast = Toast.makeText(getApplicationContext(),"You clicked something!",
-                    Toast.LENGTH_LONG);toast.show();
-        }
-    }
-
     /*TODO: implement http request from TMDb
     In order to request popular movies you will want to request data from the /movie/popular and /movie/top_rated endpoints
     https://www.google.com/url?q=https://developers.themoviedb.org/3/discover/movie-discover&sa=D&ust=1541914498758000

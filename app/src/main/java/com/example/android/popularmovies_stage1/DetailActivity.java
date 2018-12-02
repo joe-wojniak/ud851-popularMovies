@@ -6,6 +6,7 @@ package com.example.android.popularmovies_stage1;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class DetailActivity extends MainActivity {
     @Override
@@ -14,10 +15,18 @@ public class DetailActivity extends MainActivity {
         setContentView(R.layout.activity_detail);
 
         ImageView mMovie = findViewById(R.id.detailImageView);
+        TextView mTitle = findViewById(R.id.detailTitle);
+        TextView mReleaseDate = findViewById(R.id.detailReleaseDate);
+        TextView mVoteAverage = findViewById(R.id.detailVoteAverage);
+        TextView mOverview = findViewById(R.id.detailOverview);
 
         Bundle mBundle = getIntent().getExtras();
         if(mBundle!=null){
-            mMovie.setImageResource(mBundle.getInt("image"));
+            mMovie.setImageResource(mBundle.getInt("movie"));
+            //mTitle.setText(mBundle.getInt("movie"));
+            //mReleaseDate.setText(mBundle.getInt("movie"));
+            //mVoteAverage.setText(mBundle.getInt("movie"));
+            //mOverview.setText(mBundle.getInt("movie"));
         }
     }
 }
