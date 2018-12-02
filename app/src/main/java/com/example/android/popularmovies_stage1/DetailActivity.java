@@ -22,8 +22,8 @@ public class DetailActivity extends MainActivity {
 
         Bundle mBundle = getIntent().getExtras();
         if(mBundle!=null){
-            mMovie.setImageResource(mBundle.getInt("movie"));
-            //mTitle.setText(mBundle.getInt("movie"));
+            //mMovie.setImageResource(mBundle.getInt("movie"));
+            mTitle.setText(mBundle.getString("movieTitle"));
             //mReleaseDate.setText(mBundle.getInt("movie"));
             //mVoteAverage.setText(mBundle.getInt("movie"));
             //mOverview.setText(mBundle.getInt("movie"));
