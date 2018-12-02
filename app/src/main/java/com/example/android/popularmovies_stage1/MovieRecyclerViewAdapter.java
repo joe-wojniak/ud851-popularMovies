@@ -50,6 +50,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
             public void onClick(View view) {
                 Intent mIntent = new Intent(mContext, DetailActivity.class);
                 mIntent.putExtra("movieTitle", m.getTitle());
+                mIntent.putExtra("movieReleaseDate", m.getRelease_date());
                 mContext.startActivity(mIntent);
             }
         });

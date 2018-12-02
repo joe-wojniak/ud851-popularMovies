@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">Popular Movies - Stage 1</string>
-    <string name="image">Movie Poster Image here</string>
-    <string name="posterImageUri">http://i.imgur.com/DvpvklR.png</string>
+
+    <string name="image">Movie Poster</string>
+
+    <string name="movieTitle">Title: </string>
+    <string name="releaseDate">Release Date: </string>
+    <string name="voteAverage">Average Vote: </string>
+    <string name="movieOverview">What it\'s about: </string>
+
     <string name="json">
     { \"page\": 1, \"total_results\": 388565, \"total_pages\": 19429,
   \"results\": [

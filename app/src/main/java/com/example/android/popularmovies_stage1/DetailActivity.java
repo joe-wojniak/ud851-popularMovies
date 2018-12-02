@@ -24,9 +24,9 @@ public class DetailActivity extends MainActivity {
         if(mBundle!=null){
             //mMovie.setImageResource(mBundle.getInt("movie"));
             mTitle.setText(mBundle.getString("movieTitle"));
-            //mReleaseDate.setText(mBundle.getInt("movie"));
-            //mVoteAverage.setText(mBundle.getInt("movie"));
-            //mOverview.setText(mBundle.getInt("movie"));
+            mReleaseDate.setText(mBundle.getString("movieReleaseDate"));
+            //mVoteAverage.setText(mBundle.getString("movie"));
+            //mOverview.setText(mBundle.getString("movie"));
         }
     }
 }
