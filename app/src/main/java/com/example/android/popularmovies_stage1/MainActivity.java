@@ -19,24 +19,42 @@ Sections of code functionality modified from NewsApp Stage 2 (ABND Project 6) im
 background thread call to TMDb api.
 */
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.popularmovies_stage1.model.Movie;
-import com.example.android.popularmovies_stage1.utils.JsonUtils;
+import com.example.android.popularmovies_stage1.utils.Utils;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
     RecyclerView mMoviePostersRecyclerView;
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+
+    private static final String MOVIE_REQUEST_URL =
+            "https://api.themoviedb.org/3/movie/";
+
+    private static final int MOVIE_LOADER_ID = 1;
+
+    private MovieRecyclerViewAdapter mAdapter;
+
+    private TextView mEmptyStateTextView;
 
     public MainActivity() {
     }
@@ -52,10 +70,32 @@ public class MainActivity extends AppCompatActivity {
         mMoviePostersRecyclerView.setLayoutManager(mGridLayoutManager);
 
         String json = getResources().getString(R.string.json);
-        List<Movie> movieList = JsonUtils.extractFeatureFromJson(json);
+        List<Movie> movieList = Utils.extractFeatureFromJson(json);
 
-        MovieRecyclerViewAdapter mAdapter = new MovieRecyclerViewAdapter(this, movieList);
+        mAdapter = new MovieRecyclerViewAdapter(this, movieList);
         mMoviePostersRecyclerView.setAdapter(mAdapter);
+
+        // Get a reference to the ConnectivityManager to check state of network connectivity
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        // Get details on the currently active default data network
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        // If there is a network connection, fetch data
+        if (networkInfo != null && networkInfo.isConnected()) {
+            // Get a reference to the LoaderManager, in order to interact with loaders.
+            android.app.LoaderManager loaderManager = getLoaderManager();
+
+            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
+            // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
+            // because this activity implements the LoaderCallbacks interface).
+            loaderManager.initLoader(MOVIE_LOADER_ID, null, this);
+        } else {
+            // Otherwise, display error
+            // Update empty state with no connection error message
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
+        }
     }
 
     @Override
@@ -78,29 +118,53 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*TODO: implement http request from TMDb
-    In order to request popular movies you will want to request data from the /movie/popular and /movie/top_rated endpoints
-    https://www.google.com/url?q=https://developers.themoviedb.org/3/discover/movie-discover&sa=D&ust=1541914498758000
+    @Override
+    public Loader<List<Movie>> onCreateLoader(int i, Bundle bundle) {
 
-    String apiKey = BuildConfig.ApiKey;
+        String apiKey = BuildConfig.ApiKey;
+        String movieSort = "popular?";
 
-    Example request: http://api.themoviedb.org/3/movie/popular?api_key=[YOUR_API_KEY]
-     */
+        // Get a reference to the ConnectivityManager to check state of network connectivity
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
 
-    /*COMPLETE: resolve movie poster path
-    A note on resolving poster paths with themoviedb.org API
-    You will notice that the API response provides a relative path to a movie poster image when you request the metadata for a specific movie.
+        // Get details on the currently active default data network
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-    For example, the poster path return for Interstellar is “/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg”
+        if (networkInfo != null && networkInfo.isConnected()) {
+            // Build Uri
+            // https://api.themoviedb.org/3/movie/popular?api_key=8a59e50771d1f68e8ef27d13381d419c&language=en-US&page=1
+            // https://api.themoviedb.org/3/movie/top_rated?api_key=8a59e50771d1f68e8ef27d13381d419c&language=en-US&page=1
 
-    You will need to append a base path ahead of this relative path to build the complete url you will need to fetch the image using Picasso.
+            Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);
+            Uri.Builder uriBuilder = baseUri.buildUpon();
 
-    It’s constructed using 3 parts:
+            uriBuilder.appendPath(movieSort);
+            uriBuilder.appendQueryParameter("api_key", apiKey);
+            uriBuilder.appendQueryParameter("language", "en-US");
+            uriBuilder.appendQueryParameter("page", "1");
 
-    The base URL will look like: http://image.tmdb.org/t/p/.
-    Then you will need a ‘size’, which will be one of the following: "w92", "w154", "w185", "w342", "w500", "w780", or "original". For most phones we recommend using “w185”.
-    And finally the poster path returned by the query, in this case “/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg”
+            return new MovieLoader(this, uriBuilder.toString());
+        } else {
+            // Otherwise, display error
+            // Update empty state with no connection error message
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
+            return null;
+        }
+    }
 
-    Combining these three parts gives us a final url of http://image.tmdb.org/t/p/w185//nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
-     */
+    @Override
+    public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> movieList) {
+        if (movieList != null && !movieList.isEmpty()) {
+            Toast.makeText(this, "Movies Loaded", Toast.LENGTH_SHORT).show();
+        } else {
+            // no news returned, display error message
+            mEmptyStateTextView.setText(R.string.no_movies_returned);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Movie>> loader) {
+        // Implements required method
+    }
 }
