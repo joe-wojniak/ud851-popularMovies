@@ -1,5 +1,9 @@
 package com.example.android.popularmovies_stage1;
 
+/* Example code adapted from -
+https://medium.com/@sanjeevy133/an-idiots-guide-to-android-asynctaskloader-76f8bfb0a0c0
+ */
+
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 

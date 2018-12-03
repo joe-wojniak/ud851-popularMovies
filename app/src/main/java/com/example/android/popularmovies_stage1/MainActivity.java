@@ -15,8 +15,9 @@ https://docs.google.com/document/d/1ZlN1fUsCSKuInLECcJkslIqvpKlP7jWL2TP9m6UiA6I/
 Example code adapted from:
 ud851-Exercises\Lesson03-Green-Recycler-View\T03.04-Exercise-WiringUpRecyclerView
 https://www.codingdemos.com/android-gridlayout-example-recyclerview/
-Sections of code functionality modified from NewsApp Stage 2 (ABND Project 6) implementing
-background thread call to TMDb api.
+Sections of code functionality modified from NewsApp Stage 2 (ABND Project 6) and
+https://medium.com/@sanjeevy133/an-idiots-guide-to-android-asynctaskloader-76f8bfb0a0c0
+implementing background thread call to TMDb api.
 */
 
 import android.content.Context;
@@ -24,8 +25,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -39,25 +38,19 @@ import android.widget.Toast;
 import com.example.android.popularmovies_stage1.model.Movie;
 import com.example.android.popularmovies_stage1.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
     RecyclerView mMoviePostersRecyclerView;
+    TextView mEmptyStateTextView;
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-
     private static final String MOVIE_REQUEST_URL =
             "https://api.themoviedb.org/3/movie/";
-
     private static final int MOVIE_LOADER_ID = 1;
-
     private MovieRecyclerViewAdapter mAdapter;
-
-    private TextView mEmptyStateTextView;
-
-    public MainActivity() {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +62,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(this, 3);
         mMoviePostersRecyclerView.setLayoutManager(mGridLayoutManager);
 
-        String json = getResources().getString(R.string.json);
-        List<Movie> movieList = Utils.extractFeatureFromJson(json);
+        //String json = getResources().getString(R.string.json);
+        //List<Movie> movieList = Utils.extractFeatureFromJson(json);
 
-        mAdapter = new MovieRecyclerViewAdapter(this, movieList);
+        mAdapter = new MovieRecyclerViewAdapter(this, new ArrayList<Movie>());
         mMoviePostersRecyclerView.setAdapter(mAdapter);
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
@@ -99,26 +92,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.mostPopular) {
-            Toast.makeText(this, "Most Popular", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (id == R.id.topRated) {
-            Toast.makeText(this, "Top Rated", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public Loader<List<Movie>> onCreateLoader(int i, Bundle bundle) {
 
         String apiKey = BuildConfig.ApiKey;
@@ -133,8 +106,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         if (networkInfo != null && networkInfo.isConnected()) {
             // Build Uri
-            // https://api.themoviedb.org/3/movie/popular?api_key=8a59e50771d1f68e8ef27d13381d419c&language=en-US&page=1
-            // https://api.themoviedb.org/3/movie/top_rated?api_key=8a59e50771d1f68e8ef27d13381d419c&language=en-US&page=1
 
             Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);
             Uri.Builder uriBuilder = baseUri.buildUpon();
@@ -157,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> movieList) {
         if (movieList != null && !movieList.isEmpty()) {
             Toast.makeText(this, "Movies Loaded", Toast.LENGTH_SHORT).show();
+            mAdapter = new MovieRecyclerViewAdapter(this, movieList);
         } else {
             // no news returned, display error message
             mEmptyStateTextView.setText(R.string.no_movies_returned);
@@ -165,6 +137,26 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoaderReset(Loader<List<Movie>> loader) {
-        // Implements required method
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.mostPopular) {
+            Toast.makeText(this, "Most Popular", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (id == R.id.topRated) {
+            Toast.makeText(this, "Top Rated", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
