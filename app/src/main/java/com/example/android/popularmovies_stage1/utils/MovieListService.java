@@ -2,11 +2,11 @@ package com.example.android.popularmovies_stage1.utils;
 
 public class MovieListService {
 
-    public static String buildPosterURL(String posterPath, String posterSize) {
+    public static String buildPosterURL(String posterSize, String posterPath) {
 
         // Build poster uri:
-        String baseUri = "http://image.tmdb.org/t/p/";
-        posterPath = baseUri + posterSize + posterPath;
-        return posterPath;
+        final String baseUri = "http://image.tmdb.org/t/p/";
+        String finishedPosterPath = baseUri + posterSize + posterPath;
+        return finishedPosterPath;
     }
 }

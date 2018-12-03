@@ -42,7 +42,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     public void onBindViewHolder(final MovieViewHolder holder, int position) {
         final Movie m = mMovieList.get(position);
 
-        String posterPath = MovieListService.buildPosterURL(m.getPosterPath(), "w342");
+        String posterPath = MovieListService.buildPosterURL("w342", m.getPosterPath());
 
         Picasso.with(mContext)
                 .load(posterPath)

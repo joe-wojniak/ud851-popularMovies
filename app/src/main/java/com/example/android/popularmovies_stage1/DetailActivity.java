@@ -36,7 +36,7 @@ public class DetailActivity extends MainActivity {
             posterPath = mBundle.getString("moviePosterPath");
         }
         
-        String mMoviePosterPath = MovieListService.buildPosterURL(posterPath, "w500");
+        String mMoviePosterPath = MovieListService.buildPosterURL( "w500", posterPath);
         
         Picasso.with(mContext)
                 .load(mMoviePosterPath)

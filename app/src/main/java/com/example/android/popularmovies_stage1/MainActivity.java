@@ -15,12 +15,17 @@ https://docs.google.com/document/d/1ZlN1fUsCSKuInLECcJkslIqvpKlP7jWL2TP9m6UiA6I/
 Example code adapted from:
 ud851-Exercises\Lesson03-Green-Recycler-View\T03.04-Exercise-WiringUpRecyclerView
 https://www.codingdemos.com/android-gridlayout-example-recyclerview/
+Sections of code functionality modified from NewsApp Stage 2 (ABND Project 6) implementing
+background thread call to TMDb api.
 */
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.android.popularmovies_stage1.model.Movie;
 import com.example.android.popularmovies_stage1.utils.JsonUtils;
@@ -51,6 +56,27 @@ public class MainActivity extends AppCompatActivity {
 
         MovieRecyclerViewAdapter mAdapter = new MovieRecyclerViewAdapter(this, movieList);
         mMoviePostersRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.mostPopular) {
+            Toast.makeText(this, "Most Popular", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (id == R.id.topRated) {
+            Toast.makeText(this, "Top Rated", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     /*TODO: implement http request from TMDb
     In order to request popular movies you will want to request data from the /movie/popular and /movie/top_rated endpoints
@@ -77,5 +103,4 @@ public class MainActivity extends AppCompatActivity {
 
     Combining these three parts gives us a final url of http://image.tmdb.org/t/p/w185//nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
      */
-    }
 }
