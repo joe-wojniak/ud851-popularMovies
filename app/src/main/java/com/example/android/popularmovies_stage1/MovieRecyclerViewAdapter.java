@@ -27,6 +27,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     private static final String TAG = MovieRecyclerViewAdapter.class.getSimpleName();
 
     public MovieRecyclerViewAdapter(Context mContext, List<Movie> mMovieList) {
+        //TODO - figure out why MovieRecyclerViewAdapter doesn't load movie posters
         this.mContext = mContext;
         this.mMovieList = mMovieList;
     }
@@ -42,7 +43,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     public void onBindViewHolder(final MovieViewHolder holder, int position) {
         final Movie m = mMovieList.get(position);
 
-        String posterPath = MovieListService.buildPosterURL("w342", m.getPosterPath());
+        String posterPath = MovieListService.buildPosterURL("w185", m.getPosterPath());
 
         Picasso.with(mContext)
                 .load(posterPath)
