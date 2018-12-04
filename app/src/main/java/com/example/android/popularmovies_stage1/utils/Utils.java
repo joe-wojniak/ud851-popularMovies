@@ -37,7 +37,7 @@ public class Utils {
     /**
      * Query the TMDb api and return {@link Movie} objects.
      */
-    public static List<Movie> fetchMovieData(String requestUrl){
+    public static List<Movie> fetchMovieData(String requestUrl) {
         URL url = createUrl(requestUrl);
 
         String jsonResponse = null;
@@ -51,15 +51,16 @@ public class Utils {
         return movies;
     }
 
-    private static URL createUrl (String stringUrl){
+    private static URL createUrl(String stringUrl) {
         URL url = null;
         try {
             url = new URL(stringUrl);
         } catch (MalformedURLException e) {
-            Log.e(LOG_TAG, "Error with creating URL ",e);
+            Log.e(LOG_TAG, "Error with creating URL ", e);
         }
         return url;
     }
+
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
@@ -100,6 +101,7 @@ public class Utils {
         }
         return jsonResponse;
     }
+
     /**
      * Convert the {@link InputStream} into a String which contains the
      * whole JSON response from the server.
@@ -127,7 +129,10 @@ public class Utils {
             JSONArray resultsArray = baseJsonResponse.optJSONArray(KEY_RESULTS);
 
             // looping through the page results
-            for (int i = 0; i < resultsArray.length(); i++) {
+            //TODO Remove troubleshooting comments, returning too many movies
+            //for (int i = 0; i < resultsArray.length(); i++) {
+            // limit results to 5 movies (i<6)
+            for (int i = 0; i < 6; i++) {
                 // Extract out the first result (which is a movie)
                 JSONObject firstResult = resultsArray.getJSONObject(i);
                 // Extract out the title, release date, poster_path, vote average,

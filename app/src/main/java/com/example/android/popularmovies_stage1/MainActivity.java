@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public Loader<List<Movie>> onCreateLoader(int i, Bundle bundle) {
 
         String apiKey = BuildConfig.ApiKey;
-        String movieSort = "popular";
+        String movieSort = "top_rated";
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connMgr = (ConnectivityManager)

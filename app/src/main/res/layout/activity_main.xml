@@ -3,30 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/white_space">
 
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/white_space">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvPosters"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scrollbars="vertical" />
-
-        </GridLayout>
-
-        <!-- Empty view is only visible when the list has no items. -->
-        <TextView
-            android:id="@+id/empty_view"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPosters"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textAppearance="?android:textAppearanceMedium" />
-    </LinearLayout>
+            android:scrollbars="vertical" />
+
+    </GridLayout>
 </ScrollView>
