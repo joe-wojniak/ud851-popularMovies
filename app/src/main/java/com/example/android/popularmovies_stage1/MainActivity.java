@@ -36,7 +36,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.popularmovies_stage1.model.Movie;
-import com.example.android.popularmovies_stage1.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // If there is a network connection, fetch data
         if (networkInfo != null && networkInfo.isConnected()) {
             // Get a reference to the LoaderManager, in order to interact with loaders.
-            android.app.LoaderManager loaderManager = getLoaderManager();
+            LoaderManager loaderManager = getSupportLoaderManager();
 
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public Loader<List<Movie>> onCreateLoader(int i, Bundle bundle) {
 
         String apiKey = BuildConfig.ApiKey;
-        String movieSort = "popular?";
+        String movieSort = "popular";
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connMgr = (ConnectivityManager)
@@ -110,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);
             Uri.Builder uriBuilder = baseUri.buildUpon();
 
-            uriBuilder.appendPath(movieSort);
+            uriBuilder.appendEncodedPath(movieSort);
             uriBuilder.appendQueryParameter("api_key", apiKey);
             uriBuilder.appendQueryParameter("language", "en-US");
             uriBuilder.appendQueryParameter("page", "1");

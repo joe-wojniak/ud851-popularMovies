@@ -46,9 +46,9 @@ public class Utils {
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
-        List<Movie> movieList = extractFeatureFromJson(jsonResponse);
+        List<Movie> movies = extractFeatureFromJson(jsonResponse);
 
-        return movieList;
+        return movies;
     }
 
     private static URL createUrl (String stringUrl){
