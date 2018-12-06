@@ -32,7 +32,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.popularmovies_stage1.model.Movie;
@@ -43,7 +42,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Movie>> {
 
     RecyclerView mMoviePostersRecyclerView;
-    TextView mEmptyStateTextView;
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final String MOVIE_REQUEST_URL =
@@ -86,7 +84,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } else {
             // Otherwise, display error
             // Update empty state with no connection error message
-            mEmptyStateTextView.setText(R.string.no_internet_connection);
+            Toast.makeText(this,"No internet connection found.\\nPlease try again later.",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -118,7 +117,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } else {
             // Otherwise, display error
             // Update empty state with no connection error message
-            mEmptyStateTextView.setText(R.string.no_internet_connection);
+            Toast.makeText(this,"No internet connection found.\\nPlease try again later.",
+                    Toast.LENGTH_SHORT).show();
             return null;
         }
     }
@@ -130,7 +130,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mAdapter = new MovieRecyclerViewAdapter(this, movieList);
         } else {
             // no news returned, display error message
-            mEmptyStateTextView.setText(R.string.no_movies_returned);
+            Toast.makeText(this,"No internet connection found.\\nPlease try again later.",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
