@@ -129,15 +129,12 @@ public class Utils {
             JSONArray resultsArray = baseJsonResponse.optJSONArray(KEY_RESULTS);
 
             // looping through the page results
-            //TODO Remove troubleshooting comments, returning too many movies
-            //for (int i = 0; i < resultsArray.length(); i++) {
-            // limit results to 5 movies (i<6)
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < resultsArray.length(); i++) {
                 // Extract out the first result (which is a movie)
                 JSONObject firstResult = resultsArray.getJSONObject(i);
-                // Extract out the title, release date, poster_path, vote average,
-                // and plot synopsis (overview)
 
+                // Extract out the title, release date, poster_path, vote average,
+                // plot synopsis (overview), and popularity rating
                 String title = firstResult.optString(KEY_TITLE);
                 String releaseDate = firstResult.optString(KEY_RELEASE);
                 String poster_path = firstResult.optString(KEY_POSTER);

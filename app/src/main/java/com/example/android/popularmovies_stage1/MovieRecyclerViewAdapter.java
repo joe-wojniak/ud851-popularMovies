@@ -8,6 +8,7 @@ https://www.codingdemos.com/android-gridlayout-example-recyclerview/
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
     Context mContext;
     List<Movie> mMovieList;
+    String posterPath;
 
     private static final String TAG = MovieRecyclerViewAdapter.class.getSimpleName();
 
@@ -43,7 +45,8 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
     public void onBindViewHolder(final MovieViewHolder holder, int position) {
         final Movie m = mMovieList.get(position);
 
-        String posterPath = MovieListService.buildPosterURL("w92", m.getPosterPath());
+        Log.d(TAG,"Posterpath: "+m.getPosterPath());
+        posterPath = MovieListService.buildPosterURL("w185", m.getPosterPath());
 
         Picasso.with(mContext)
                 .load(posterPath)
@@ -57,7 +60,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
                 mIntent.putExtra("movieReleaseDate", m.getRelease_date());
                 mIntent.putExtra("movieVoteAverage", m.getVoteAverage());
                 mIntent.putExtra("movieOverview", m.getOverview());
-                mIntent.putExtra("moviePosterPath",m.getPosterPath());
+                mIntent.putExtra("moviePosterPath", m.getPosterPath());
                 mContext.startActivity(mIntent);
             }
         });
@@ -73,7 +76,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
         public MovieViewHolder(View itemView) {
             super(itemView);
-            posterImage = itemView.findViewById(R.id.image);
+            posterImage = itemView.findViewById(R.id.rvItemImage);
         }
     }
 }

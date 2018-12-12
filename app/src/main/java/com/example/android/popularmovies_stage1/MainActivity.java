@@ -30,13 +30,13 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.android.popularmovies_stage1.model.Movie;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Movie>> {
@@ -54,16 +54,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d(LOG_TAG,"start Main Activity onCreate method");
+
         mMoviePostersRecyclerView = findViewById(R.id.rvPosters);
         mMoviePostersRecyclerView.setHasFixedSize(false);
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(this, 3);
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(this, 5);
         mMoviePostersRecyclerView.setLayoutManager(mGridLayoutManager);
 
+        // TODO Remove static json:
         //String json = getResources().getString(R.string.json);
         //List<Movie> movieList = Utils.extractFeatureFromJson(json);
 
-        mAdapter = new MovieRecyclerViewAdapter(this, new ArrayList<Movie>());
-        mMoviePostersRecyclerView.setAdapter(mAdapter);
+        //mAdapter = new MovieRecyclerViewAdapter(this, new ArrayList<Movie>());
+        //mMoviePostersRecyclerView.setAdapter(mAdapter);
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connMgr = (ConnectivityManager)
@@ -126,8 +129,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> movieList) {
         if (movieList != null && !movieList.isEmpty()) {
-            Toast.makeText(this, "Movies Loaded", Toast.LENGTH_SHORT).show();
             mAdapter = new MovieRecyclerViewAdapter(this, movieList);
+            mMoviePostersRecyclerView.setAdapter(mAdapter);
+            Toast.makeText(this, "Movies Loaded", Toast.LENGTH_SHORT).show();
         } else {
             // no news returned, display error message
             Toast.makeText(this,"No internet connection found.\\nPlease try again later.",
