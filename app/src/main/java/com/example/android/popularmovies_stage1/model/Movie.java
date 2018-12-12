@@ -37,16 +37,8 @@ public class Movie implements Serializable {
         return release_date;
     }
 
-    public void setRelease_date(String release_date) {
-        this.release_date = release_date;
-    }
-
     public String getPosterPath() {
         return posterPath;
-    }
-
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
     }
 
     public String getVoteAverage() {
@@ -60,17 +52,4 @@ public class Movie implements Serializable {
     public String getOverview() {
         return overview;
     }
-
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
-    public String getPopularity() {
-        return popularity;
-    }
-
-    public void setPopularity(String popularity) {
-        this.popularity = popularity;
-    }
-
 }

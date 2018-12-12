@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         String apiKey = BuildConfig.ApiKey;
 
-        // Get preferences for Settings
+        // Get preferences from Settings
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         String movieSort = sharedPrefs.getString(getString(R.string.settings_order_by_key),
@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoaderReset(Loader<List<Movie>> loader) {
+        mAdapter.mMovieList.clear();
     }
 
     @Override
