@@ -21,16 +21,18 @@ implementing background thread call to TMDb api.
 */
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -43,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     RecyclerView mMoviePostersRecyclerView;
 
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final String MOVIE_REQUEST_URL =
             "https://api.themoviedb.org/3/movie/";
     private static final int MOVIE_LOADER_ID = 1;
@@ -54,19 +55,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d(LOG_TAG,"start Main Activity onCreate method");
-
         mMoviePostersRecyclerView = findViewById(R.id.rvPosters);
         mMoviePostersRecyclerView.setHasFixedSize(false);
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(this, 5);
         mMoviePostersRecyclerView.setLayoutManager(mGridLayoutManager);
-
-        // TODO Remove static json:
-        //String json = getResources().getString(R.string.json);
-        //List<Movie> movieList = Utils.extractFeatureFromJson(json);
-
-        //mAdapter = new MovieRecyclerViewAdapter(this, new ArrayList<Movie>());
-        //mMoviePostersRecyclerView.setAdapter(mAdapter);
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connMgr = (ConnectivityManager)
@@ -87,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } else {
             // Otherwise, display error
             // Update empty state with no connection error message
-            Toast.makeText(this,"No internet connection found.\\nPlease try again later.",
+            Toast.makeText(this, "No internet connection found.\\nPlease try again later.",
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -96,7 +88,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public Loader<List<Movie>> onCreateLoader(int i, Bundle bundle) {
 
         String apiKey = BuildConfig.ApiKey;
-        String movieSort = "top_rated";
+
+        // Get preferences for Settings
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String movieSort = sharedPrefs.getString(getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_popular));
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connMgr = (ConnectivityManager)
@@ -120,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } else {
             // Otherwise, display error
             // Update empty state with no connection error message
-            Toast.makeText(this,"No internet connection found.\\nPlease try again later.",
+            Toast.makeText(this, "No internet connection found.\\nPlease try again later.",
                     Toast.LENGTH_SHORT).show();
             return null;
         }
@@ -133,8 +130,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mMoviePostersRecyclerView.setAdapter(mAdapter);
             Toast.makeText(this, "Movies Loaded", Toast.LENGTH_SHORT).show();
         } else {
-            // no news returned, display error message
-            Toast.makeText(this,"No internet connection found.\\nPlease try again later.",
+            // no movies returned, display error message
+            Toast.makeText(this, "No internet connection found.\\nPlease try again later.",
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -152,12 +149,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.mostPopular) {
-            Toast.makeText(this, "Most Popular", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (id == R.id.topRated) {
-            Toast.makeText(this, "Top Rated", Toast.LENGTH_SHORT).show();
+        if (id == R.id.Settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
             return true;
         }
         return super.onOptionsItemSelected(item);

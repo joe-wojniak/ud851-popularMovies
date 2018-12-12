@@ -14,7 +14,16 @@
     <string name="voteAverage">Average Vote: </string>
     <string name="movieOverview">What it\'s about: </string>
 
-    <string name="json">
+  <!-- Strings for Settings Menu -->
+  <string name="settings_menu_item">Settings</string>
+  <string name="settings_title">Movie App Settings</string>
+
+  <!-- Strings For Order-By Preference -->
+  <string name="settings_order_by_key" translatable="false">movieSort</string>
+  <string name="settings_order_by_popular" translatable="false">popular</string>
+  <string name="settings_order_by_topRated" translatable="false">top_rated</string>
+
+  <string name="json">
     { \"page\": 1, \"total_results\": 388565, \"total_pages\": 19429,
   \"results\": [
     {
