@@ -1,8 +1,20 @@
 package com.example.android.popularmovies_stage1.model;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Movie implements Serializable {
+public class Movie implements Parcelable {
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 
     private String title;
     private String release_date;
@@ -51,5 +63,29 @@ public class Movie implements Serializable {
 
     public String getOverview() {
         return overview;
+    }
+
+    public Movie(Parcel in) {
+        this.title = in.readString();
+        this.release_date = in.readString();
+        this.posterPath = in.readString();
+        this.vote_average = in.readString();
+        this.overview = in.readString();
+        this.popularity = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.title);
+        dest.writeString(this.release_date);
+        dest.writeString(this.posterPath);
+        dest.writeString(this.vote_average);
+        dest.writeString(this.overview);
+        dest.writeString(this.popularity);
     }
 }

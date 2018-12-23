@@ -1,16 +1,16 @@
 package com.example.android.popularmovies_stage1;
 /*
-Popular Movies App Stage 1 (ud851 - AND)
+Popular Movies App Stage 2 (ud851 - AND)
 
 Internet permissions and network state permissions are required in AndroidManifest.xml:
 <uses-permission android:name="android.permission.INTERNET"/>
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 Project rubric:
-https://review.udacity.com/#!/rubrics/66/view
+https://review.udacity.com/#!/rubrics/1881/view
 
 Implementation Guide:
-https://docs.google.com/document/d/1ZlN1fUsCSKuInLECcJkslIqvpKlP7jWL2TP9m6UiA6I/pub?embedded=true#h.cntdg23jy69n
+https://docs.google.com/document/d/1ZlN1fUsCSKuInLECcJkslIqvpKlP7jWL2TP9m6UiA6I/pub?embedded=true#h.7sxo8jefdfll
 
 Example code adapted from:
 ud851-Exercises\Lesson03-Green-Recycler-View\T03.04-Exercise-WiringUpRecyclerView

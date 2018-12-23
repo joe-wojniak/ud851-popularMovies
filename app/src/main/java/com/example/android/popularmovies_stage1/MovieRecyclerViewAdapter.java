@@ -8,7 +8,6 @@ https://www.codingdemos.com/android-gridlayout-example-recyclerview/
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,10 +41,9 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
     @Override
     public void onBindViewHolder(final MovieViewHolder holder, int position) {
-        final Movie m = mMovieList.get(position);
+        final Movie movieParcel = mMovieList.get(position);
 
-        Log.d(TAG,"Posterpath: "+m.getPosterPath());
-        posterPath = MovieListService.buildPosterURL("w185", m.getPosterPath());
+        posterPath = MovieListService.buildPosterURL("w185", movieParcel.getPosterPath());
 
         Picasso.with(mContext)
                 .load(posterPath)
@@ -55,11 +53,12 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
             @Override
             public void onClick(View view) {
                 Intent mIntent = new Intent(mContext, DetailActivity.class);
-                mIntent.putExtra("movieTitle", m.getTitle());
-                mIntent.putExtra("movieReleaseDate", m.getRelease_date());
-                mIntent.putExtra("movieVoteAverage", m.getVoteAverage());
-                mIntent.putExtra("movieOverview", m.getOverview());
-                mIntent.putExtra("moviePosterPath", m.getPosterPath());
+                mIntent.putExtra("movie", movieParcel);
+                //mIntent.putExtra("movieTitle", m.getTitle());
+                //mIntent.putExtra("movieReleaseDate", m.getRelease_date());
+                //mIntent.putExtra("movieVoteAverage", m.getVoteAverage());
+                //mIntent.putExtra("movieOverview", m.getOverview());
+                //mIntent.putExtra("moviePosterPath", m.getPosterPath());
                 mContext.startActivity(mIntent);
             }
         });

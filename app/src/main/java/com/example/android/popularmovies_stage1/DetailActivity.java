@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.popularmovies_stage1.model.Movie;
 import com.example.android.popularmovies_stage1.utils.MovieListService;
 import com.squareup.picasso.Picasso;
 
@@ -29,11 +30,12 @@ public class DetailActivity extends MainActivity {
 
         Bundle mBundle = getIntent().getExtras();
         if(mBundle!=null){
-            mTitle.setText(mBundle.getString("movieTitle"));
-            mReleaseDate.setText(mBundle.getString("movieReleaseDate"));
-            mVoteAverage.setText(mBundle.getString("movieVoteAverage"));
-            mOverview.setText(mBundle.getString("movieOverview"));
-            posterPath = mBundle.getString("moviePosterPath");
+            Movie movie = mBundle.getParcelable("movie");
+            mTitle.setText(movie.getTitle());
+            mReleaseDate.setText(movie.getRelease_date());
+            mVoteAverage.setText(movie.getVoteAverage());
+            mOverview.setText(movie.getOverview());
+            posterPath = movie.getPosterPath();
         }
         
         String mMoviePosterPath = MovieListService.buildPosterURL( "w500", posterPath);

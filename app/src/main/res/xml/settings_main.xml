@@ -2,6 +2,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings_title">
 
+    <CheckBoxPreference
+        android:defaultValue="@bool/pref_show_favorite"
+        android:key="movieFavorite"
+        android:title="Show Favorites" />
+
     <ListPreference
         android:defaultValue="@string/settings_order_by_popular"
         android:entries="@array/movie_sort_preference_labels"
