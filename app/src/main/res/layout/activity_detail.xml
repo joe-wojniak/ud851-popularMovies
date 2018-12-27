@@ -36,7 +36,7 @@
                 android:layout_width="@dimen/large_white_space"
                 android:layout_height="wrap_content" />
 
-            <RadioButton
+            <Button
                 android:id="@+id/buttonFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
