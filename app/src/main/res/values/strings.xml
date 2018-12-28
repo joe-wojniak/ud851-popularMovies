@@ -13,7 +13,7 @@
     <string name="releaseDate">Release Date: </string>
     <string name="voteAverage">Average Vote: </string>
     <string name="movieOverview">What it\'s about: </string>
-    <string name="favorite">Favorite</string>
+    <string name="button_favorite">Favorite</string>
     <string name="button_trailer">Movie Trailer</string>
     <string name="button_review">Movie Review</string>
 

@@ -16,10 +16,11 @@ public class MovieEntry {
     private String overview;
     private String popularity;
     private String isFavorite;
+    private String movieId;
 
     @Ignore
     public MovieEntry(String title, String release_date, String posterPath, String vote_average,
-                      String overview, String popularity, String isFavorite) {
+                      String overview, String popularity, String isFavorite, String movieId) {
         this.title = title;
         this.release_date = release_date;
         this.posterPath = posterPath;
@@ -27,10 +28,11 @@ public class MovieEntry {
         this.overview = overview;
         this.popularity = popularity;
         this.isFavorite = isFavorite;
+        this.movieId = movieId;
     }
 
     public MovieEntry(int id, String title, String release_date, String posterPath, String vote_average,
-                      String overview, String popularity, String isFavorite) {
+                      String overview, String popularity, String isFavorite, String movieId) {
         this.id = id;
         this.title = title;
         this.release_date = release_date;
@@ -39,6 +41,7 @@ public class MovieEntry {
         this.overview = overview;
         this.popularity = popularity;
         this.isFavorite = isFavorite;
+        this.movieId = movieId;
     }
 
     public int getId() {
@@ -103,5 +106,13 @@ public class MovieEntry {
 
     public void setIsFavorite(String isFavorite) {
         this.isFavorite = isFavorite;
+    }
+
+    public String getMovieId(){
+        return movieId;
+    }
+
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
     }
 }
