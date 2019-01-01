@@ -12,5 +12,5 @@
         android:entries="@array/movie_sort_preference_labels"
         android:entryValues="@array/movie_sort_preference_values"
         android:key="movieSort"
-        android:title="Sort Preference" />
+        android:title="Sort Preference"/>
 </PreferenceScreen>
