@@ -22,15 +22,18 @@
     <string name="settings_title">Movie App Settings</string>
 
     <!-- Strings For Shared Preferences -->
-    <string name="pref_order_by_popular" translatable="false">popular</string>
-    <string name="pref_order_by_topRated" translatable="false">top_rated</string>
+    <string name="pref_sort_title" translatable="true">Sort Preference</string>
+
+    <string name="pref_sort_key" translatable="false">movieSort</string>
+
+    <string name="pref_order_label_popular" translatable="false">Popular</string>
+    <string name="pref_order_label_topRated" translatable="false">Top Rated</string>
+
+    <string name="pref_order_popular_value" translatable="false">popular</string>
+    <string name="pref_order_topRated_value" translatable="false">top_rated</string>
+
     <string name="pref_show_favorites_label">Show Favorites</string>
     <string name="pref_show_favorites_key" translatable="false">showFavorites</string>
-
-    <!-- Adding old string names to resolve compilation errors -->
-    <string name="settings_order_by_topRated" translatable="false">top_rated</string>
-    <string name="settings_order_by_popular" translatable="false">popular</string>
-
 
     <!-- static test data used for developing app -->
     <string name="json">

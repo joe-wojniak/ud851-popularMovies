@@ -8,9 +8,9 @@
         android:title="Show Favorites List" />
 
     <ListPreference
-        android:defaultValue="@string/settings_order_by_popular"
+        android:defaultValue="@string/pref_order_popular_value"
         android:entries="@array/movie_sort_preference_labels"
         android:entryValues="@array/movie_sort_preference_values"
-        android:key="movieSort"
-        android:title="Sort Preference"/>
+        android:key="@string/pref_sort_key"
+        android:title="@string/pref_sort_title"/>
 </PreferenceScreen>
