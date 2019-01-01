@@ -12,7 +12,7 @@ import java.util.List;
 @Dao
 public interface MovieDao {
 
-    @Query("SELECT * FROM movie")
+    @Query("SELECT * FROM favorites")
     List<Movie> loadAllMovies();
 
     @Insert
