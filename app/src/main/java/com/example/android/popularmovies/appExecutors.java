@@ -3,20 +3,20 @@ package com.example.android.popularmovies;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class  AppExecutors {
+public class appExecutors {
 
     private static final Object LOCK = new Object();
-    private static AppExecutors sInstance;
+    private static appExecutors sInstance;
     private final Executor diskIO;
 
-    private AppExecutors(Executor diskIO) {
+    private appExecutors(Executor diskIO) {
         this.diskIO = diskIO;
     }
 
-    public static AppExecutors getInstance() {
+    public static appExecutors getInstance() {
         if (sInstance == null) {
             synchronized (LOCK) {
-                sInstance = new AppExecutors(Executors.newSingleThreadExecutor());
+                sInstance = new appExecutors(Executors.newSingleThreadExecutor());
             }
         }
         return sInstance;
