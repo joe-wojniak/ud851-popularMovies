@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youTubePlayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/min_youtube_width"
+        android:minHeight="@dimen/min_youtube_height"></com.google.android.youtube.player.YouTubePlayerView>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/buttonStopVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop Video"/>
+</LinearLayout>

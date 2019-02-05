@@ -1,0 +1,121 @@
+<resources>
+    <string name="app_name">Popular Movies - Stage 2</string>
+
+    <string name="youtube">Movie Trailer</string>
+
+    <!-- Error message when there is no internet connectivity -->
+    <string name="no_internet_connection">No internet connection found.\nPlease try again later.</string>
+
+    <!-- Error message when there are no movies returned -->
+    <string name="no_movies_returned">No movies found.\nThere may be an issue with the movie service.\nPlease try again later.</string>
+
+    <string name="image">Movie Poster</string>
+
+    <string name="movieTitle">Title: </string>
+    <string name="releaseDate">Release Date: </string>
+    <string name="movieOverview">What it\'s about: </string>
+    <string name="button_favorite">Favorite</string>
+    <string name="button_trailer">Play Movie Trailer</string>
+    <string name="button_review">Movie Review</string>
+    <string name="vote_average">Voted: </string>
+
+    <!-- Strings for Settings Menu -->
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">Movie App Settings</string>
+
+    <!-- Strings For Shared Preferences -->
+    <string name="pref_sort_title" translatable="true">Sort Preference</string>
+
+    <string name="pref_sort_key" translatable="false">movieSort</string>
+
+    <string name="pref_order_label_popular" translatable="false">Popular</string>
+    <string name="pref_order_label_topRated" translatable="false">Top Rated</string>
+
+    <string name="pref_order_popular_value" translatable="false">popular</string>
+    <string name="pref_order_topRated_value" translatable="false">top_rated</string>
+
+    <string name="pref_show_favorites_label">Show Favorites</string>
+    <string name="pref_show_favorites_key" translatable="false">showFavorites</string>
+
+    <!-- static test data used for developing app -->
+    <string name="json">
+    { \"page\": 1, \"total_results\": 388565, \"total_pages\": 19429,
+  \"results\": [
+    {
+      \"vote_count\": 741,
+      \"id\": 338952,
+      \"video\": false,
+      \"vote_average\": 7.2,
+      \"title\": \"Fantastic Beasts: The Crimes of Grindelwald\",
+      \"popularity\": 361.556,
+      \"poster_path\": \"\/uyJgTzAsp3Za2TaPiZt2yaKYRIR.jpg\",
+      \"original_language\": \"en\",
+      \"original_title\": \"Fantastic Beasts: The Crimes of Grindelwald\",
+      \"genre_ids\": [18,10751,14],
+      \"backdrop_path\": \"\/xgbeBCjmFpRYHDF7tQ7U98EREWp.jpg\",
+      \"adult\": false,
+      \"overview\": \"Gellert Grindelwald has escaped imprisonment and has begun gathering followers\",
+      \"release_date\": \"2018-11-14\"},
+    {
+      \"vote_count\": 2240,
+      \"id\": 353081,
+      \"video\": false,
+      \"vote_average\": 7.3,
+      \"title\": \"Mission: Impossible - Fallout\",
+      \"popularity\": 212.924,
+      \"poster_path\": \"/AkJQpZp9WoNdj7pLYSj1L0RcMMN.jpg\",
+      \"original_language\": \"en\",
+      \"original_title\": \"Mission: Impossible - Fallout\",
+      \"genre_ids\": [28,53,12],
+      \"backdrop_path\": \"/aw4FOsWr2FY373nKSxbpNi3fz4F.jpg\",
+      \"adult\": false,
+      \"overview\": \"When an IMF mission ends badly, the world is faced with dire consequences.\",
+      \"release_date\": \"2018-07-13\"},
+    {
+      \"vote_count\": 1118,
+      \"id\": 424694,
+      \"video\": false,
+      \"vote_average\": 8.3,
+      \"title\": \"Bohemian Rhapsody\",
+      \"popularity\": 183.602,
+      \"poster_path\": \"/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg\",
+      \"original_language\": \"en\",
+      \"original_title\": \"Bohemian Rhapsody\",
+      \"genre_ids\": [18,10402],
+      \"backdrop_path\": \"/pbXgLEYh8rlG2Km5IGZPnhcnuSz.jpg\",
+      \"adult\": false,
+      \"overview\": \"Singer Freddie Mercury, guitarist Brian May, drummer Roger Taylor and bass\",
+      \"release_date\": \"2018-10-24\"},
+    {
+      \"vote_count\": 88,
+      \"id\": 360920,
+      \"video\": false,
+      \"vote_average\": 6.4,
+      \"title\": \"The Grinch\",
+      \"popularity\": 155.69,
+      \"poster_path\": \"/rWQVj6Z8kPdsbt7XPjVBCltxq90.jpg\",
+      \"original_language\": \"en\",
+      \"original_title\": \"The Grinch\",
+      \"genre_ids\": [16,10751,35,14],
+      \"backdrop_path\": \"/zRDkmww7Bu11wiz2g86RxSreiY4.jpg\",
+      \"adult\": false,
+      \"overview\": \"The Grinch hatches a scheme to ruin Christmas when the residents of Whoville\",
+      \"release_date\": \"2018-11-08\"},
+    {
+      \"vote_count\": 63,
+      \"id\": 507569,
+      \"video\": false,
+      \"vote_average\": 5.7,
+      \"title\": \"The Seven Deadly Sins: Prisoners of the Sky\",
+      \"popularity\": 150,
+      \"poster_path\": \"/r6pPUVUKU5eIpYj4oEzidk5ZibB.jpg\",
+      \"original_language\": \"en\",
+      \"original_title\": \"劇場版 七つの大罪 天空の囚われ人\",
+      \"genre_ids\": [28,12,14,16],
+      \"backdrop_path\": \"/uKwOX7MtKlAaGeCQe6c4jc1vZpj.jpg\",
+      \"adult\": false,
+      \"overview\": \"Traveling in search of the rare ingredient, \“sky fish\”  Meliodas and Hawk\",
+      \"release_date\": \"2018-08-18\"}
+  ]
+}</string>
+</resources>
